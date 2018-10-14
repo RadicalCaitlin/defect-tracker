@@ -1,0 +1,25 @@
+{
+  "name": "defect-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack-cli",
+    "watch": "./node_modules/.bin/webpack-cli --watch"
+  },
+  "author": "Caitlin Terzieff",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^9.1.5",
+    "bootstrap": "^4.1.3",
+    "chart.js": "^2.7.2",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.9.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}

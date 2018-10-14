@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using DefectTracker.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DefectTracker.Contracts.Repositories;
+using DefectTracker.Repositories;
 
 namespace DefectTracker.Web
 {
@@ -35,7 +37,13 @@ namespace DefectTracker.Web
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddDbContext<DefectTrackerDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IProjectRepository, ProjectRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +65,7 @@ namespace DefectTracker.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {

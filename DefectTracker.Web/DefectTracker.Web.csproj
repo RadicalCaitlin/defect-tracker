@@ -10,4 +10,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DefectTracker.Contracts\DefectTracker.Contracts.csproj" />
+    <ProjectReference Include="..\DefectTracker.Repositories\DefectTracker.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

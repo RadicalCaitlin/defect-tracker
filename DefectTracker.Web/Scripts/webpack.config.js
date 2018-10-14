@@ -6,18 +6,10 @@ var extractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     mode: 'development',
     entry: {
-        "main": "./app.js",
-        "profile": "./App/Profile/main.js",
-        "edit-profile": "./App/EditProfile/main.js",
-        "edit-song": "./App/EditSong/main.js",
-        "messages": "./App/Messages/main.js",
-        "connect": "./App/Connect/main.js",
-        "sessions": "./App/Sessions/main.js",
-        "upload-song": "./App/Profile/upload-song.js",
-        "auth": "./App/Auth/main.js"
+        "main": "./js/main.js"
     },
     output: {
-        filename: "../../Content/dist/[name].bundle.js"
+        filename: "../../wwwroot/dist/[name].bundle.js"
     },
     module: {
         rules: [
@@ -29,7 +21,7 @@ module.exports = {
     },
     plugins: [
         new extractTextPlugin({
-            filename: "../../Content/dist/[name].bundle.css",
+            filename: "../../wwwroot/dist/[name].bundle.css",
             allChunks: true
         }),
         new webpack.LoaderOptionsPlugin({

@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectTracker.Web", "DefectTracker.Web\DefectTracker.Web.csproj", "{A4B69463-6B4C-4E09-859B-A7BEA2DF2366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefectTracker.Web", "DefectTracker.Web\DefectTracker.Web.csproj", "{A4B69463-6B4C-4E09-859B-A7BEA2DF2366}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DefectTracker.Database", "DefectTracker.Database\DefectTracker.Database.sqlproj", "{BFA977F3-07DD-44C9-B2E4-05932468839F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefectTracker.DataAccess", "DefectTracker.DataAccess\DefectTracker.DataAccess.csproj", "{9A239E1C-206B-41F3-BBCC-26172361D39F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectTracker.Core", "DefectTracker.Core\DefectTracker.Core.csproj", "{B18D0622-DF34-405D-8536-6EE69ECFA381}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectTracker.Contracts", "DefectTracker.Contracts\DefectTracker.Contracts.csproj", "{CC552C47-54C3-4CDB-A64D-6D68E753F21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectTracker.Repositories", "DefectTracker.Repositories\DefectTracker.Repositories.csproj", "{5663865D-2B36-474A-93BF-00718E773962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,28 @@ Global
 		{A4B69463-6B4C-4E09-859B-A7BEA2DF2366}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B69463-6B4C-4E09-859B-A7BEA2DF2366}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4B69463-6B4C-4E09-859B-A7BEA2DF2366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA977F3-07DD-44C9-B2E4-05932468839F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9A239E1C-206B-41F3-BBCC-26172361D39F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A239E1C-206B-41F3-BBCC-26172361D39F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A239E1C-206B-41F3-BBCC-26172361D39F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A239E1C-206B-41F3-BBCC-26172361D39F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18D0622-DF34-405D-8536-6EE69ECFA381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18D0622-DF34-405D-8536-6EE69ECFA381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18D0622-DF34-405D-8536-6EE69ECFA381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18D0622-DF34-405D-8536-6EE69ECFA381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC552C47-54C3-4CDB-A64D-6D68E753F21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC552C47-54C3-4CDB-A64D-6D68E753F21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC552C47-54C3-4CDB-A64D-6D68E753F21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC552C47-54C3-4CDB-A64D-6D68E753F21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5663865D-2B36-474A-93BF-00718E773962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5663865D-2B36-474A-93BF-00718E773962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5663865D-2B36-474A-93BF-00718E773962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5663865D-2B36-474A-93BF-00718E773962}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
