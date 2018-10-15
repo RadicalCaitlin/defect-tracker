@@ -1,0 +1,20 @@
+﻿;WITH [QualifierTypes] AS (
+	SELECT Id = 1, [Name] = 'Missing'
+	UNION
+	SELECT Id = 2, [Name] = 'Incorrect'
+) 
+MERGE INTO dbo.DefectQualifierTypes AS TARGET 
+USING [QualifierTypes] AS SOURCE ON TARGET.Id = SOURCE.Id
+WHEN NOT MATCHED BY TARGET THEN INSERT
+(
+	[Id],
+	[Name]
+)
+VALUES
+(
+	SOURCE.[Id],
+	SOURCE.[Name]
+)
+WHEN MATCHED THEN UPDATE
+	SET TARGET.Name = SOURCE.Name
+WHEN NOT MATCHED BY SOURCE THEN DELETE;

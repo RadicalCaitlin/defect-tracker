@@ -28,6 +28,6 @@ namespace DefectTracker.Repositories
         => await _dbContext.Projects.SingleOrDefaultAsync(p => p.Id == projectId);
 
         public async Task<IEnumerable<Projects>> GetProjectsByUserIdAsync(string currentUserId)
-            => await _dbContext.Projects.Where(p => p.UserId == currentUserId).ToListAsync();
+            => await _dbContext.Projects.Where(p => p.CreatedByUserId == currentUserId).ToListAsync();
     }
 }

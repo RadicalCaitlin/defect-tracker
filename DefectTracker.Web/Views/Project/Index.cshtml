@@ -8,7 +8,9 @@
     <div class="col">
         <h4>@Model.Project.Name</h4>
         <canvas id="myChart" width="400" height="150"></canvas>
-        <div>[Add Things to Table]</div>
+        <div class="mt-4">
+            <a asp-area="" asp-controller="Defect" asp-action="Create" asp-route-projectId="@Model.Project.Id" class="btn btn-primary">Add Defect</a>
+        </div>
     </div>
 </div>
 

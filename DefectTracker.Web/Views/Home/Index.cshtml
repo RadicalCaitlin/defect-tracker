@@ -9,20 +9,30 @@
         <h4>My Projects</h4>
         <hr />
         <a asp-area="" asp-controller="Project" asp-action="Create" class="btn btn-primary">Create Project</a>
-        <table class="table table-striped mt-4">
-            <tr>
-                <th>Name</th>
-                <th>Date Created</th>
-            </tr>
-            @foreach (var project in Model.Projects)
-            {
+        @if (Model.Projects.Any())
+        {
+            <table class="table table-striped mt-4">
                 <tr>
-                    <td>
-                        <a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@project.Id">@project.Name</a>
-                    </td>
-                    <td>@project.DateCreatedOffset.ToString("MM/dd/yyyy")</td>
+                    <th>Name</th>
+                    <th>Date Created</th>
                 </tr>
-            }
-        </table>
+                @foreach (var project in Model.Projects)
+                {
+                    <tr>
+                        <td>
+                            <a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@project.Id">@project.Name</a>
+                        </td>
+                        <td>@project.DateCreatedOffset.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="jumbotron mt-4">
+                <h5 class="mb-4">Looks like you don't have any projects yet.</h5>
+                <h6>Click the "Create Project" button above to get started.</h6>
+            </div>
+        }
     </div>
 </div>

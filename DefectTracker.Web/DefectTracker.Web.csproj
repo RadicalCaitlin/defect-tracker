@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DefectTracker.Contracts\DefectTracker.Contracts.csproj" />
+    <ProjectReference Include="..\DefectTracker.Core\DefectTracker.Core.csproj" />
     <ProjectReference Include="..\DefectTracker.Repositories\DefectTracker.Repositories.csproj" />
   </ItemGroup>
 

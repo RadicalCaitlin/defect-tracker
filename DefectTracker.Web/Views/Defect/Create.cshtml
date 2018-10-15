@@ -1,0 +1,57 @@
+﻿@model DefectTracker.Contracts.Requests.CreateDefectRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row mt-4">
+    <div class="col col-4 m-auto">
+        <h2>Create Defect</h2>
+        <hr/>
+        <form method="post">
+            <input asp-for="@Model.CreatedByUserId" type="hidden" />
+            <div class="form-group">
+                <label asp-for="@Model.DefectTypeId"></label>
+                <select asp-for="@Model.DefectTypeId" asp-items="@(new SelectList(Model.DefectTypes, "Id", "Name"))" class="form-control"></select>
+                <span asp-validation-for="@Model.DefectTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.DefectQualifierId"></label>
+                <select asp-for="@Model.DefectQualifierId" asp-items="@(new SelectList(Model.DefectQualifiers, "Id", "Name"))" class="form-control"></select>
+                <span asp-validation-for="@Model.DefectTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OriginDateCreatedOffset"></label>
+                <input asp-for="@Model.OriginDateCreatedOffset" class="form-control" />
+                <span asp-validation-for="@Model.OriginDateCreatedOffset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.DefectReportedByTypeId"></label>
+                <select asp-for="@Model.DefectReportedByTypeId" asp-items="@(new SelectList(Model.DefectReportedByTypes, "Id", "Name"))" class="form-control"></select>
+                <span asp-validation-for="@Model.DefectReportedByTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Origin"></label>
+                <textarea asp-for="@Model.Origin" class="form-control"></textarea>
+                <span asp-validation-for="@Model.Origin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Activity"></label>
+                <textarea asp-for="@Model.Activity" class="form-control"></textarea>
+                <span asp-validation-for="@Model.Activity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trigger"></label>
+                <textarea asp-for="@Model.Trigger" class="form-control"></textarea>
+                <span asp-validation-for="@Model.Trigger" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Impact"></label>
+                <textarea asp-for="@Model.Impact" class="form-control"></textarea>
+                <span asp-validation-for="@Model.Impact" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+

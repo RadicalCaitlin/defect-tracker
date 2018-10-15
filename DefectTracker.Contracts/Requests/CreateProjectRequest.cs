@@ -19,7 +19,7 @@ namespace DefectTracker.Contracts.Requests
         {
             var project = new Projects
             {
-                UserId = UserId,
+                CreatedByUserId = UserId,
                 Name = Name,
                 DateCreatedOffset = DateTime.UtcNow
             };

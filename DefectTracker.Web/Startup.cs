@@ -43,6 +43,7 @@ namespace DefectTracker.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddScoped<IDefectRepository, DefectRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
         }
 
