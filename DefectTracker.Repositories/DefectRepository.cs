@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DefectTracker.Contracts.Repositories;
 using DefectTracker.Core;
@@ -28,6 +29,9 @@ namespace DefectTracker.Repositories
 
         public async Task<IEnumerable<DefectReportedByTypes>> GetDefectReportedByTypesAsync()
         => await _dbContext.DefectReportedByTypes.ToListAsync();
+
+        public async Task<IEnumerable<Defects>> GetDefectsByProjectIdAsync(int projectId)
+        => await _dbContext.Defects.Where(d => d.ProjectId == projectId).ToListAsync();
 
         public async Task<IEnumerable<DefectTypes>> GetDefectTypesAsync()
         => await _dbContext.DefectTypes.ToListAsync();

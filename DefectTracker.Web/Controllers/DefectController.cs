@@ -56,9 +56,9 @@ namespace DefectTracker.Web.Controllers
                 return View();
             }
 
-            var project = await _defectRepository.CreateDefectAsync(request.CreateDefect());
+            var defect = await _defectRepository.CreateDefectAsync(request.CreateDefect());
 
-            return RedirectToAction("Index", "Project", new { id = project.Id });
+            return RedirectToAction("Index", "Project", new { id = request.ProjectId });
         }
     }
 }

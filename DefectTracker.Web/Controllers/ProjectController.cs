@@ -1,10 +1,12 @@
 ﻿using DefectTracker.Contracts.Repositories;
 using DefectTracker.Contracts.Requests;
+using DefectTracker.Web.ViewModels.Defect;
 using DefectTracker.Web.ViewModels.Project;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DefectTracker.Web.Controllers
@@ -13,11 +15,16 @@ namespace DefectTracker.Web.Controllers
     public class ProjectController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IDefectRepository _defectRepository;
         private readonly IProjectRepository _projectRepository;
 
-        public ProjectController(UserManager<IdentityUser> userManager, IProjectRepository projectRepository)
+        public ProjectController(
+            UserManager<IdentityUser> userManager, 
+            IDefectRepository defectRepository,
+            IProjectRepository projectRepository)
         {
             _userManager = userManager;
+            _defectRepository = defectRepository;
             _projectRepository = projectRepository;
         }
 
@@ -27,9 +34,27 @@ namespace DefectTracker.Web.Controllers
             if (id == null)
                 return RedirectToAction("Index", "Home");
 
+            var defects = await _defectRepository.GetDefectsByProjectIdAsync(id.GetValueOrDefault());
+
             var model = new IndexViewModel
             {
-                Project = await _projectRepository.GetProjectByIdAsync(id.GetValueOrDefault())
+                Project = await _projectRepository.GetProjectByIdAsync(id.GetValueOrDefault()),
+                Defects = defects.Select(x => new DefectsForChart
+                {
+                    Activity = x.Activity,
+                    CreatedByUserId = x.CreatedByUserId,
+                    DateCreated = x.DateCreatedOffset.ToString("MM/dd"),
+                    DefectQualifierTypeId = x.DefectQualifierTypeId,
+                    DefectReportedByTypeId = x.DefectReportedByTypeId,
+                    DefectTypeId = x.DefectTypeId,
+                    Id = x.Id,
+                    Impact = x.Impact,
+                    Origin = x.Origin,
+                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd"),
+                    ProjectId = x.ProjectId,
+                    Trigger = x.Trigger
+                }),
+                DefectTypes = await _defectRepository.GetDefectTypesAsync()
             };
 
             return View(model);

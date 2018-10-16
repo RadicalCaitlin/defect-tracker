@@ -12,6 +12,8 @@ namespace DefectTracker.Contracts.Repositories
 
         Task<IEnumerable<DefectReportedByTypes>> GetDefectReportedByTypesAsync();
 
+        Task<IEnumerable<Defects>> GetDefectsByProjectIdAsync(int projectId);
+
         Task<IEnumerable<DefectTypes>> GetDefectTypesAsync();
     }
 }

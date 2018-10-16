@@ -6,7 +6,8 @@ var extractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     mode: 'development',
     entry: {
-        "main": "./js/main.js"
+        "main": "./js/main.js",
+        "defectChart": "./js/DefectChart/main.js"
     },
     output: {
         filename: "../../wwwroot/dist/[name].bundle.js"
