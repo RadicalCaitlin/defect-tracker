@@ -8,6 +8,8 @@ public partial class DefectTrackerDbContext : DbContext
     {
     }
 
+    public DbSet<Activities> Activities { get; set; }
+
     public DbSet<DefectQualifierTypes> DefectQualifierTypes { get; set; }
 
     public DbSet<DefectReportedByTypes> DefectReportedByTypes { get; set; }
@@ -16,7 +18,13 @@ public partial class DefectTrackerDbContext : DbContext
 
     public DbSet<DefectTypes> DefectTypes { get; set; }
 
+    public DbSet<ProjectAreas> ProjectAreas { get; set; }
+
     public DbSet<Projects> Projects { get; set; }
+
+    public DbSet<ProjectUsers> ProjectUsers { get; set; }
+
+    public DbSet<Tasks> Tasks { get; set; }
 
     public DefectTrackerDbContext(DbContextOptions<DefectTrackerDbContext> options)
         : base(options)

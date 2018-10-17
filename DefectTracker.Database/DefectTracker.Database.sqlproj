@@ -62,6 +62,7 @@
     <Folder Include="dbo\Tables\Identity" />
     <Folder Include="dbo\Tables\Core" />
     <Folder Include="dbo\Scripts" />
+    <Folder Include="dbo\Tables\Core\Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Identity\AspNetRoleClaims.sql" />
@@ -73,11 +74,15 @@
     <Build Include="dbo\Tables\Identity\AspNetUserTokens.sql" />
     <Build Include="dbo\Tables\Core\Projects.sql" />
     <Build Include="dbo\Tables\Core\Defects.sql" />
-    <Build Include="dbo\Tables\Core\DefectTypes.sql" />
-    <Build Include="dbo\Tables\Core\DefectQualifierTypes.sql" />
-    <Build Include="dbo\Tables\Core\DefectReportedByTypes.sql" />
     <None Include="dbo\Scripts\SeedDefectTypes.sql" />
     <None Include="dbo\Scripts\SeedReportedByTypes.sql" />
+    <Build Include="dbo\Tables\Core\ProjectAreas.sql" />
+    <Build Include="dbo\Tables\Core\ProjectUsers.sql" />
+    <Build Include="dbo\Tables\Core\Activities.sql" />
+    <Build Include="dbo\Tables\Core\Tasks.sql" />
+    <Build Include="dbo\Tables\Core\Types\DefectReportedByTypes.sql" />
+    <Build Include="dbo\Tables\Core\Types\DefectQualifierTypes.sql" />
+    <Build Include="dbo\Tables\Core\Types\DefectTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="local.publish.xml" />

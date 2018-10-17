@@ -19,7 +19,7 @@ namespace DefectTracker.Web.Controllers
         private readonly IProjectRepository _projectRepository;
 
         public ProjectController(
-            UserManager<IdentityUser> userManager, 
+            UserManager<IdentityUser> userManager,
             IDefectRepository defectRepository,
             IProjectRepository projectRepository)
         {
@@ -29,13 +29,13 @@ namespace DefectTracker.Web.Controllers
         }
 
         [Route("Project/{id:int}")]
-        public async Task<IActionResult> Index(int? id = null)
+        public async Task<IActionResult> Index(int id)
         {
-            if (id == null)
+            if (id == 0)
                 return RedirectToAction("Index", "Home");
 
-            var project = await _projectRepository.GetProjectByIdAsync(id.GetValueOrDefault());
-            var defects = await _defectRepository.GetDefectsByProjectIdAsync(id.GetValueOrDefault());
+            var project = await _projectRepository.GetProjectByIdAsync(id);
+            var defects = await _defectRepository.GetDefectsByProjectIdAsync(id);
             var projectForChart = new ProjectForChart
             {
                 CreatedByUserId = project.CreatedByUserId,
@@ -88,6 +88,38 @@ namespace DefectTracker.Web.Controllers
             return View(model);
         }
 
+        [Route("Project/{id:int}/Manage")]
+        public async Task<IActionResult> Manage(int id)
+        {
+            if (id == 0)
+                return RedirectToAction("Index", "Home");
+
+            var model = new ManageViewModel
+            {
+                Project = await _projectRepository.GetProjectByIdAsync(id),
+                Activities = await _projectRepository.GetActivitiesByProjectIdAsync(id),
+                Areas = await _projectRepository.GetAreasByProjectIdAsync(id),
+                Tasks = await _projectRepository.GetTasksByProjectIdAsync(id),
+                Users = await _projectRepository.GetProjectUsersByProjectIdAsync(id)
+            };
+
+            if (TempData["CreateAreaRequest"] != null)
+            {
+                model.CreateAreaRequest = (CreateAreaRequest)TempData["CreateAreaRequest"];
+                ViewData = (ViewDataDictionary)TempData["ViewData"];
+            }
+
+            if (TempData["CreateProjectUserRequest"] != null)
+            {
+                model.CreateProjectUserRequest = (CreateProjectUserRequest)TempData["CreateProjectUserRequest"];
+                ViewData = (ViewDataDictionary)TempData["ViewData"];
+            }
+
+            return View(model);
+        }
+
+        #region FormPosts
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateProjectRequest request)
         {
@@ -102,6 +134,37 @@ namespace DefectTracker.Web.Controllers
 
             return RedirectToAction("Index", "Project", new { id = project.Id });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateArea(CreateAreaRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["CreateAreaRequest"] = request;
+                TempData["ViewData"] = ViewData;
+                return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
+            }
+
+            var area = await _projectRepository.CreateProjectAreasAsync(request.CreateProjectArea());
+
+            return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(CreateProjectUserRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["CreateProjectUserRequest"] = request;
+                TempData["ViewData"] = ViewData;
+                return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
+            }
+
+            var area = await _projectRepository.CreateProjectUserAsync(request.CreateProjectUser());
+
+            return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
+        }
+
+        #endregion
     }
 }
-   

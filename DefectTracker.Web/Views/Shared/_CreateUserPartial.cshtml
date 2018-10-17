@@ -1,0 +1,13 @@
+﻿@model DefectTracker.Web.ViewModels.Project.ManageViewModel
+
+<form asp-area="" asp-controller="Project" asp-action="CreateUser" method="post">
+    <input type="hidden" name="ProjectId" value="@Model.Project.Id" />
+    <div class="form-group mt-3">
+        <label asp-for="@Model.CreateProjectUserRequest.Name"></label>
+        <input asp-for="@Model.CreateProjectUserRequest.Name" name="Name" class="form-control" />
+        <span asp-validation-for="@Model.CreateProjectUserRequest.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create User</button>
+    </div>
+</form>

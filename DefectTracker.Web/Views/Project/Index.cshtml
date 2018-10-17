@@ -6,7 +6,10 @@
 
 <div class="row mt-4">
     <div class="col">
-        <h4 class="mb-4">@Model.Project.Name</h4>
+        <div class="d-flex align-items-baseline">
+            <h4 class="mb-4">@Model.Project.Name</h4>
+            <a asp-area="" asp-controller="Project" asp-action="Manage" asp-route-projectId="@Model.Project.Id" class="btn btn-link">Manage Project</a>
+        </div>
         <canvas id="myChart" width="400" height="150"></canvas>
         <div class="mt-4">
             <a asp-area="" asp-controller="Defect" asp-action="Create" asp-route-projectId="@Model.Project.Id" class="btn btn-primary">Add Defect</a>

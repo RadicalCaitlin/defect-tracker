@@ -1,0 +1,13 @@
+﻿@model DefectTracker.Web.ViewModels.Project.ManageViewModel
+
+<form asp-area="" asp-controller="Project" asp-action="CreateArea" method="post">
+    <input type="hidden" name="ProjectId" value="@Model.Project.Id" />
+    <div class="form-group mt-3">
+        <label asp-for="@Model.CreateAreaRequest.Name"></label>
+        <input asp-for="@Model.CreateAreaRequest.Name" name="Name" class="form-control" />
+        <span asp-validation-for="@Model.CreateAreaRequest.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Area</button>
+    </div>
+</form>
