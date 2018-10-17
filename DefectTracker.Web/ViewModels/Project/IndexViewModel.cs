@@ -6,7 +6,7 @@ namespace DefectTracker.Web.ViewModels.Project
 {
     public class IndexViewModel
     {
-        public Projects Project { get; set; }
+        public ProjectForChart Project { get; set; }
 
         public IEnumerable<DefectsForChart> Defects { get; set; }
 

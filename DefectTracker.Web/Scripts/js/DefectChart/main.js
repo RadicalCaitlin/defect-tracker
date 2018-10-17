@@ -1,4 +1,4 @@
-$().ready(function() {
+$().ready(function () {
     var backgroundColors = [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -24,11 +24,40 @@ $().ready(function() {
     var dates = [];
     var defectCountPerDateRange = [];
 
-    getLabels();
+    initializeDates();
     createDefectTypeArrays();
     mapDefects();
     getCountsForDays();
     createDataSetsForChart();
+
+    function compare(a, b) {
+        var aDate = a.split("/");
+        var bDate = b.split("/");
+
+        if (aDate[2] > bDate[2])
+            return 1;
+
+        if (aDate[2] < bDate[2])
+            return -1;
+
+        if (aDate[2] === bDate[2]) {
+            if (aDate[0] > bDate[0])
+                return 1;
+
+            if (aDate[0] < bDate[0])
+                return -1;
+
+            if (aDate[0] === b[0]) {
+                if (aDate[1] > bDate[1])
+                    return 1;
+
+                if (aDate[1] < bDate[1])
+                    return -1;
+
+                return 0;
+            }
+        }
+    }
 
     function createDataSetsForChart() {
         for (var i = 0; i < defectTypes.length; i++) {
@@ -57,7 +86,9 @@ $().ready(function() {
             var defectsByDay = [];
 
             for (var x = 0; x < dates.length; x++) {
-                var defectsForDate = categorizedDefects[i].filter(function(defect) {
+                var defectsForDate = categorizedDefects[i].filter(function (defect) {
+                    debugger;
+
                     return defect.originDate == dates[x];
                 });
 
@@ -71,14 +102,12 @@ $().ready(function() {
         console.log(defectCountPerDateRange);
     }
 
-    function getLabels() {
+    function initializeDates() {
         var today = new Date();
+        var formattedDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 
-        for (var i = 1; i < today.getDate() + 1; i++) {
-            var month = today.getMonth() + 1;
-
-            dates.push(month + "/" + i);
-        }
+        dates.push(originDate);
+        dates.push(formattedDate);
     }
 
     function mapDefects() {
@@ -86,10 +115,19 @@ $().ready(function() {
             var currentDefect = defects[key];
 
             categorizedDefects[currentDefect.defectTypeId].push(currentDefect);
+
+            var findDate = dates.filter(function(date) {
+                return date == currentDefect.originDate;
+            });
+
+            if (findDate.length == 0)
+                dates.push(currentDefect.originDate);
         }
 
         console.log('Categorized Defects: ');
         console.log(categorizedDefects);
+
+        dates.sort(compare);
     }
 
     var ctx = document.getElementById("myChart");

@@ -14,6 +14,7 @@
             <table class="table table-striped mt-4">
                 <tr>
                     <th>Name</th>
+                    <th>Origin Date</th>
                     <th>Date Created</th>
                 </tr>
                 @foreach (var project in Model.Projects)
@@ -22,6 +23,7 @@
                         <td>
                             <a asp-area="" asp-controller="Project" asp-action="Index" asp-route-id="@project.Id">@project.Name</a>
                         </td>
+                        <td>@project.OriginDateOffset.ToString("MM/dd/yyyy")</td>
                         <td>@project.DateCreatedOffset.ToString("MM/dd/yyyy")</td>
                     </tr>
                 }

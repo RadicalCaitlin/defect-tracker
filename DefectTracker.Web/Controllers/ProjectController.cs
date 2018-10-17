@@ -34,23 +34,32 @@ namespace DefectTracker.Web.Controllers
             if (id == null)
                 return RedirectToAction("Index", "Home");
 
+            var project = await _projectRepository.GetProjectByIdAsync(id.GetValueOrDefault());
             var defects = await _defectRepository.GetDefectsByProjectIdAsync(id.GetValueOrDefault());
+            var projectForChart = new ProjectForChart
+            {
+                CreatedByUserId = project.CreatedByUserId,
+                DateCreated = project.DateCreatedOffset.ToString("MM/dd/yyyy"),
+                Id = project.Id,
+                Name = project.Name,
+                OriginDate = project.OriginDateOffset.ToString("MM/dd/yyyy")
+            };
 
             var model = new IndexViewModel
             {
-                Project = await _projectRepository.GetProjectByIdAsync(id.GetValueOrDefault()),
+                Project = projectForChart,
                 Defects = defects.Select(x => new DefectsForChart
                 {
                     Activity = x.Activity,
                     CreatedByUserId = x.CreatedByUserId,
-                    DateCreated = x.DateCreatedOffset.ToString("MM/dd"),
+                    DateCreated = x.DateCreatedOffset.ToString("MM/dd/yyyy"),
                     DefectQualifierTypeId = x.DefectQualifierTypeId,
                     DefectReportedByTypeId = x.DefectReportedByTypeId,
                     DefectTypeId = x.DefectTypeId,
                     Id = x.Id,
                     Impact = x.Impact,
                     Origin = x.Origin,
-                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd"),
+                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
                     ProjectId = x.ProjectId,
                     Trigger = x.Trigger
                 }),

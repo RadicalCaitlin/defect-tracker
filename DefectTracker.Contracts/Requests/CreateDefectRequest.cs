@@ -54,7 +54,7 @@ namespace DefectTracker.Contracts.Requests
                 DefectTypeId = DefectTypeId,
                 DefectQualifierTypeId = DefectQualifierId,
                 Origin = Origin,
-                OriginDateCreatedOffset = DateTime.UtcNow,
+                OriginDateCreatedOffset = OriginDateCreatedOffset,
                 DefectReportedByTypeId = DefectReportedByTypeId,
                 DateCreatedOffset = DateTime.UtcNow,
                 CreatedByUserId = CreatedByUserId,

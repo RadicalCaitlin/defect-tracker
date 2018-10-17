@@ -17,5 +17,5 @@
     CONSTRAINT [FK_Defect_DefectQualifierType] FOREIGN KEY ([DefectQualifierTypeId]) REFERENCES [DefectQualifierTypes]([Id]), 
     CONSTRAINT [FK_Defect_DefectReportedByType] FOREIGN KEY ([DefectReportedByTypeId]) REFERENCES [DefectReportedByTypes]([Id]), 
     CONSTRAINT [FK_Defects_ToTable] FOREIGN KEY ([CreatedByUserId]) REFERENCES [AspNetUsers]([Id]), 
-    CONSTRAINT [FK_Defects_ToTable_1] FOREIGN KEY ([ProjectId]) REFERENCES [Projects]([Id])
+    CONSTRAINT [FK_Defects_ToTable_1] FOREIGN KEY ([ProjectId]) REFERENCES [Projects]([Id]) ON DELETE CASCADE
 )

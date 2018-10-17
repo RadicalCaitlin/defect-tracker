@@ -13,6 +13,11 @@ namespace DefectTracker.Contracts.Requests
         [MaxLength(100)]
         public string Name { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Origin Date")]
+        public DateTimeOffset OriginDateOffset { get; set; } = DateTime.UtcNow;
+
         public DateTimeOffset DateCreatedOffset { get; set; }
 
         public Projects CreateProject()
@@ -21,7 +26,8 @@ namespace DefectTracker.Contracts.Requests
             {
                 CreatedByUserId = UserId,
                 Name = Name,
-                DateCreatedOffset = DateTime.UtcNow
+                DateCreatedOffset = DateTime.UtcNow,
+                OriginDateOffset = OriginDateOffset
             };
 
             return project;

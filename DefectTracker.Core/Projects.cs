@@ -10,6 +10,8 @@ namespace DefectTracker.Core
 
         public DateTimeOffset DateCreatedOffset { get; set; }
 
+        public DateTimeOffset OriginDateOffset { get; set; }
+
         public string CreatedByUserId { get; set; }
     }
 }

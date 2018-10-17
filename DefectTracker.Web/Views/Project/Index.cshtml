@@ -17,8 +17,9 @@
 @section Scripts {
     <script src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <script>
-    var defects = @Html.Raw(Json.Serialize(Model.Defects));
-    var defectTypes = @Html.Raw(Json.Serialize(Model.DefectTypes));
+        var originDate = '@Model.Project.OriginDate';
+        var defects = @Html.Raw(Json.Serialize(Model.Defects));
+        var defectTypes = @Html.Raw(Json.Serialize(Model.DefectTypes));
     </script>
     <script src="~/dist/defectChart.bundle.js"></script>
 }
