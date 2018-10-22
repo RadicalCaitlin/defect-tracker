@@ -12,4 +12,4 @@ Post-Deployment Script Template
 
 :r .\SeedDefectTypes.sql
 :r .\SeedQualifierTypes.sql
-:r .\SeedReportedByTypes.sql
+:r .\SeedDefectModelTypes.sql

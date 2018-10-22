@@ -1,0 +1,16 @@
+﻿;WITH [DefectModels] AS (
+	SELECT Id = 1, [Name] = 'IBM Orthogonal Defect Classification (ODC)'
+) 
+MERGE INTO dbo.DefectModelTypes AS TARGET 
+USING [DefectModels] AS SOURCE ON TARGET.Id = SOURCE.Id
+WHEN NOT MATCHED BY TARGET THEN INSERT
+(
+	[Name]
+)
+VALUES
+(
+	SOURCE.[Name]
+)
+WHEN MATCHED THEN UPDATE
+	SET TARGET.Name = SOURCE.Name
+WHEN NOT MATCHED BY SOURCE THEN DELETE;

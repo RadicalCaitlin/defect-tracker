@@ -48,14 +48,9 @@ namespace DefectTracker.Contracts.Requests
         {
             var defect = new Defects
             {
-                Activity = Activity,
-                Trigger = Trigger,
-                Impact = Impact,
                 DefectTypeId = DefectTypeId,
                 DefectQualifierTypeId = DefectQualifierId,
-                Origin = Origin,
                 OriginDateCreatedOffset = OriginDateCreatedOffset,
-                DefectReportedByTypeId = DefectReportedByTypeId,
                 DateCreatedOffset = DateTime.UtcNow,
                 CreatedByUserId = CreatedByUserId,
                 ProjectId = ProjectId

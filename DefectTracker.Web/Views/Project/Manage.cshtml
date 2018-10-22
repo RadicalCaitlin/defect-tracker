@@ -34,7 +34,7 @@
 <div class="row">
     <div class="col">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="d-flex align-items-baseline">
                     <h5>Users</h5>
                     @if (Model.Users.Any())
@@ -60,19 +60,19 @@
                         </div>
                     }
                 </div>
-                <div class="jumbotron p-4">
+                <div class="jumbotron p-2">
                     @if (Model.Users.Any())
                     {
                         foreach (var user in Model.Users)
                         {
-                            <div class="jumbotron p-4 bg-dark">
+                            <div class="jumbotron p-2 bg-dark mb-2">
                                 <span class="text-white">@user.Name</span>
                             </div>
                         }
                     }
                     else
                     {
-                        <div class="jumbotron p-4 bg-white">
+                        <div class="jumbotron p-2 bg-white">
                             <h5>Looks like you don't have any project users yet.</h5>
                             <h6>Why don't you add your first user?</h6>
                             <div class="row">

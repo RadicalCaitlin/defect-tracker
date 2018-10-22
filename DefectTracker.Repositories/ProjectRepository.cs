@@ -46,6 +46,9 @@ namespace DefectTracker.Repositories
         public async Task<IEnumerable<ProjectAreas>> GetAreasByProjectIdAsync(int projectId)
         => await _dbContext.ProjectAreas.Where(a => a.ProjectId == projectId).ToListAsync();
 
+        public async Task<IEnumerable<ProjectBugs>> GetBugsByProjectIdAsync(int projectId)
+        => await _dbContext.ProjectBugs.Where(b => b.ProjectId == projectId).ToListAsync();
+
         public async Task<Projects> GetProjectByIdAsync(int projectId)
         => await _dbContext.Projects.SingleOrDefaultAsync(p => p.Id == projectId);
 

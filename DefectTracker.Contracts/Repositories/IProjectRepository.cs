@@ -16,6 +16,8 @@ namespace DefectTracker.Contracts.Repositories
 
         Task<IEnumerable<ProjectAreas>> GetAreasByProjectIdAsync(int projectId);
 
+        Task<IEnumerable<ProjectBugs>> GetBugsByProjectIdAsync(int projectId);
+
         Task<Projects> GetProjectByIdAsync(int projectId);
 
         Task<IEnumerable<Projects>> GetProjectsByUserIdAsync(string currentUserId);

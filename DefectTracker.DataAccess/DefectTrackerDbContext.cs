@@ -20,6 +20,8 @@ public partial class DefectTrackerDbContext : DbContext
 
     public DbSet<ProjectAreas> ProjectAreas { get; set; }
 
+    public DbSet<ProjectBugs> ProjectBugs { get; set; }
+
     public DbSet<Projects> Projects { get; set; }
 
     public DbSet<ProjectUsers> ProjectUsers { get; set; }
