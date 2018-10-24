@@ -1,0 +1,32 @@
+﻿@model DefectTracker.Contracts.Requests.CreateBugRequest
+
+@{
+    ViewData["Title"] = "CreateBug";
+}
+
+<div class="row mt-4">
+    <div class="col col-4 m-auto">
+        <h2>Create Bug</h2>
+        <form method="post">
+            <input asp-for="@Model.ProjectId" type="hidden" />
+            <div class="form-group">
+                <label asp-for="@Model.WorkItemId"></label>
+                <input asp-for="@Model.WorkItemId" class="form-control" autofocus/>
+                <span asp-validation-for="@Model.WorkItemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Title"></label>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OriginDateOffset"></label>
+                <input asp-for="@Model.OriginDateOffset" class="form-control" />
+                <span asp-validation-for="@Model.OriginDateOffset" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+
+

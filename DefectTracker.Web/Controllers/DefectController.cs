@@ -11,11 +11,16 @@ namespace DefectTracker.Web.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IDefectRepository _defectRepository;
+        private readonly IProjectRepository _projectRepository;
 
-        public DefectController(UserManager<IdentityUser> userManager, IDefectRepository defectRepository)
+        public DefectController(
+            UserManager<IdentityUser> userManager, 
+            IDefectRepository defectRepository,
+            IProjectRepository projectRepository)
         {
             _userManager = userManager;
             _defectRepository = defectRepository;
+            _projectRepository = projectRepository;
         }
 
         public IActionResult Index()
@@ -24,17 +29,20 @@ namespace DefectTracker.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int projectId)
+        public async Task<IActionResult> Create(int projectId, int bugId, int defectModelId)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var bug = await _projectRepository.GetProjectBugByIdAsync(bugId);
 
             var model = new CreateDefectRequest
             {
                 CreatedByUserId = user.Id,
                 ProjectId = projectId,
                 DefectQualifiers = await _defectRepository.GetDefectQualifiersAsync(),
-                DefectReportedByTypes = await _defectRepository.GetDefectReportedByTypesAsync(),
-                DefectTypes = await _defectRepository.GetDefectTypesAsync()
+                DefectTypes = await _defectRepository.GetDefectTypesAsync(),
+                Bug = bug,
+                DefectModelTypeId = defectModelId,
+                OriginDateCreatedOffset = bug.OriginDateOffset
             };
 
             if (TempData["CreateDefectRequest"] != null)

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ProjectBugs]
 (
 	 [Id]					INT					NOT NULL IDENTITY(1,1)
-	,[Title]				NVARCHAR(100)		NOT NULL
+	,[Title]				NVARCHAR(250)		NOT NULL
 	,[WorkItemId]			INT					NOT NULL
 	,[ProjectId]			INT					NOT NULL
 	,[OriginDateOffset]		DATETIMEOFFSET		NOT NULL

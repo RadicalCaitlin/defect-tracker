@@ -27,9 +27,6 @@ namespace DefectTracker.Repositories
         public async Task<IEnumerable<DefectQualifierTypes>> GetDefectQualifiersAsync()
         => await _dbContext.DefectQualifierTypes.ToListAsync();
 
-        public async Task<IEnumerable<DefectReportedByTypes>> GetDefectReportedByTypesAsync()
-        => await _dbContext.DefectReportedByTypes.ToListAsync();
-
         public async Task<IEnumerable<Defects>> GetDefectsByProjectIdAsync(int projectId)
         => await _dbContext.Defects.Where(d => d.ProjectId == projectId).ToListAsync();
 

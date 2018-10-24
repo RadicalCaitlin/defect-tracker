@@ -55,8 +55,9 @@ namespace DefectTracker.Web.Controllers
                     DefectQualifierTypeId = x.DefectQualifierTypeId,
                     DefectTypeId = x.DefectTypeId,
                     Id = x.Id,
-                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
-                    ProjectId = x.ProjectId
+                    ProjectId = x.ProjectId,
+                    BugId = x.BugId,
+                    DefectModelTypeId = x.DefectModelTypeId
                 }),
                 DefectTypes = await _defectRepository.GetDefectTypesAsync(),
                 Project = projectForChart
@@ -79,6 +80,24 @@ namespace DefectTracker.Web.Controllers
             {
                 model = (CreateProjectRequest)TempData["CreateProjectRequest"];
                 ViewData = (ViewDataDictionary)TempData["ViewData"];
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBug(int projectId)
+        {
+            var model = new CreateBugRequest
+            {
+                ProjectId = projectId
+            };
+
+            if (TempData["CreateBugRequest"] != null)
+            {
+                var data = TempData.Get<CreateBugRequest>("CreateBugRequest");
+                model.OriginDateOffset = data.OriginDateOffset;
+                model.ProjectId = data.ProjectId;
             }
 
             return View(model);
@@ -144,6 +163,22 @@ namespace DefectTracker.Web.Controllers
             var area = await _projectRepository.CreateProjectAreasAsync(request.CreateProjectArea());
 
             return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBug(CreateBugRequest request)
+        {
+            TempData.Put("CreateBugRequest", request);
+
+            if (!ModelState.IsValid)
+            {
+                TempData["ViewData"] = ViewData;
+                return RedirectToAction("CreateBug", "Project", new { projectId = request.ProjectId });
+            }
+
+            var bug = await _projectRepository.CreateProjectBugAsync(request.CreateBug());
+
+            return RedirectToAction("CreateBug", "Project", new { projectId = request.ProjectId });
         }
 
         [HttpPost]

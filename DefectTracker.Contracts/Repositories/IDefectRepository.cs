@@ -10,8 +10,6 @@ namespace DefectTracker.Contracts.Repositories
 
         Task<IEnumerable<DefectQualifierTypes>> GetDefectQualifiersAsync();
 
-        Task<IEnumerable<DefectReportedByTypes>> GetDefectReportedByTypesAsync();
-
         Task<IEnumerable<Defects>> GetDefectsByProjectIdAsync(int projectId);
 
         Task<IEnumerable<DefectTypes>> GetDefectTypesAsync();

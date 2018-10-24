@@ -17,32 +17,26 @@ namespace DefectTracker.Contracts.Requests
         public int DefectQualifierId { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Defect Reported Date")]
-        public DateTimeOffset OriginDateCreatedOffset { get; set; } = DateTime.UtcNow;
-
-        [Required]
-        [Display(Name = "Defect Reported By")]
-        public int DefectReportedByTypeId { get; set; }
+        public DateTimeOffset OriginDateCreatedOffset { get; set; }
+        
 
         [Required]
         public string CreatedByUserId { get; set; }
 
-        public string Origin { get; set; }
-
-        public string Activity { get; set; }
-
-        public string Trigger { get; set; }
-
-        public string Impact { get; set; }
-
+        [Required]
         public int ProjectId { get; set; }
+
+        [Required]
+        public int BugId { get; set; }
+
+        [Required]
+        public int DefectModelTypeId { get; set; }
 
         public IEnumerable<DefectQualifierTypes> DefectQualifiers { get; set; }
 
-        public IEnumerable<DefectReportedByTypes> DefectReportedByTypes { get; set; }
-
         public IEnumerable<DefectTypes> DefectTypes { get; set; }
+
+        public ProjectBugs Bug { get; set; }
 
         public Defects CreateDefect()
         {
@@ -50,10 +44,12 @@ namespace DefectTracker.Contracts.Requests
             {
                 DefectTypeId = DefectTypeId,
                 DefectQualifierTypeId = DefectQualifierId,
-                OriginDateCreatedOffset = OriginDateCreatedOffset,
                 DateCreatedOffset = DateTime.UtcNow,
                 CreatedByUserId = CreatedByUserId,
-                ProjectId = ProjectId
+                ProjectId = ProjectId,
+                BugId = BugId,
+                DefectModelTypeId = DefectModelTypeId,
+                OriginDateCreatedOffset = OriginDateCreatedOffset
             };
 
             return defect;

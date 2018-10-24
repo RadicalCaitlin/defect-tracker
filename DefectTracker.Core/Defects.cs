@@ -17,5 +17,9 @@ namespace DefectTracker.Core
         public string CreatedByUserId { get; set; }
 
         public int ProjectId { get; set; }
+
+        public int BugId { get; set; }
+
+        public int DefectModelTypeId { get; set; }
     }
 }

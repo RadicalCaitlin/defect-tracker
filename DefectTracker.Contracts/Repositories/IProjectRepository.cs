@@ -8,6 +8,8 @@ namespace DefectTracker.Contracts.Repositories
     {
         Task<ProjectAreas> CreateProjectAreasAsync(ProjectAreas projectArea);
 
+        Task<ProjectBugs> CreateProjectBugAsync(ProjectBugs projectBugs);
+
         Task<Projects> CreateProjectAsync(Projects project);
 
         Task<ProjectUsers> CreateProjectUserAsync(ProjectUsers projectUser);
@@ -19,6 +21,8 @@ namespace DefectTracker.Contracts.Repositories
         Task<IEnumerable<ProjectBugs>> GetBugsByProjectIdAsync(int projectId);
 
         Task<Projects> GetProjectByIdAsync(int projectId);
+
+        Task<ProjectBugs> GetProjectBugByIdAsync(int bugId);
 
         Task<IEnumerable<Projects>> GetProjectsByUserIdAsync(string currentUserId);
 

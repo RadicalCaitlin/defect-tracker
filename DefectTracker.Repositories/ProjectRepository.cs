@@ -32,6 +32,14 @@ namespace DefectTracker.Repositories
             return project;
         }
 
+        public async Task<ProjectBugs> CreateProjectBugAsync(ProjectBugs projectBugs)
+        {
+            _dbContext.ProjectBugs.Add(projectBugs);
+            await _dbContext.SaveChangesAsync();
+
+            return projectBugs;
+        }
+
         public async Task<ProjectUsers> CreateProjectUserAsync(ProjectUsers projectUser)
         {
             _dbContext.ProjectUsers.Add(projectUser);
@@ -48,6 +56,9 @@ namespace DefectTracker.Repositories
 
         public async Task<IEnumerable<ProjectBugs>> GetBugsByProjectIdAsync(int projectId)
         => await _dbContext.ProjectBugs.Where(b => b.ProjectId == projectId).ToListAsync();
+
+        public async Task<ProjectBugs> GetProjectBugByIdAsync(int bugId)
+        => await _dbContext.ProjectBugs.SingleOrDefaultAsync(b => b.Id == bugId);
 
         public async Task<Projects> GetProjectByIdAsync(int projectId)
         => await _dbContext.Projects.SingleOrDefaultAsync(p => p.Id == projectId);

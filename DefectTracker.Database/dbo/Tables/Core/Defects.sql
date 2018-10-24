@@ -8,9 +8,11 @@
 	,[CreatedByUserId]			NVARCHAR(450)		NOT NULL
 	,[ProjectId]				INT					NOT NULL
 	,[BugId]					INT					NOT NULL
+	,[DefectModelTypeId]		INT					NOT NULL
     CONSTRAINT [PK_Defect] PRIMARY KEY ([Id]), 
     CONSTRAINT [FK_Defect_DefectType] FOREIGN KEY ([DefectTypeId]) REFERENCES [DefectTypes]([Id]), 
     CONSTRAINT [FK_Defect_DefectQualifierType] FOREIGN KEY ([DefectQualifierTypeId]) REFERENCES [DefectQualifierTypes]([Id]),
-    CONSTRAINT [FK_Defects_ToTable] FOREIGN KEY ([CreatedByUserId]) REFERENCES [AspNetUsers]([Id]), 
-    CONSTRAINT [FK_Defects_ToTable_1] FOREIGN KEY ([ProjectId]) REFERENCES [Projects]([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_Defects_AspNetUsers] FOREIGN KEY ([CreatedByUserId]) REFERENCES [AspNetUsers]([Id]), 
+    CONSTRAINT [FK_Defects_Projects] FOREIGN KEY ([ProjectId]) REFERENCES [Projects]([Id]) ON DELETE CASCADE, 
+    CONSTRAINT [FK_Defects_DefectModelTypes] FOREIGN KEY ([DefectModelTypeId]) REFERENCES [DefectModelTypes]([Id])
 )

@@ -12,8 +12,6 @@ public partial class DefectTrackerDbContext : DbContext
 
     public DbSet<DefectQualifierTypes> DefectQualifierTypes { get; set; }
 
-    public DbSet<DefectReportedByTypes> DefectReportedByTypes { get; set; }
-
     public DbSet<Defects> Defects { get; set; }
 
     public DbSet<DefectTypes> DefectTypes { get; set; }
