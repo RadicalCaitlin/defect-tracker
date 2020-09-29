@@ -1,7 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GroupChartBy = void 0;
 const Chart = require("chart.js");
-let dateFormat = 'M/D/yyyy';
+const moment = require("moment");
+var GroupChartBy;
+(function (GroupChartBy) {
+    GroupChartBy["Day"] = "Day";
+    GroupChartBy["Week"] = "Week";
+    GroupChartBy["Month"] = "Month";
+})(GroupChartBy = exports.GroupChartBy || (exports.GroupChartBy = {}));
 let backgroundColors = [
     'rgba(255, 99, 132, 0.2)',
     'rgba(54, 162, 235, 0.2)',
@@ -34,7 +41,6 @@ let categorizedDefects = [];
 let dataSets = [];
 let dates = [];
 let defectCountPerDateRange = [];
-initializeDates();
 createDefectTypeArrays();
 mapDefects();
 getCountsForDays();
@@ -91,22 +97,43 @@ function getCountsForDays() {
         defectCountPerDateRange.push(defectsByDay);
     });
 }
-function initializeDates() {
-    let today = new Date();
-    let formattedDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-    dates.push(formattedDate);
-}
 function mapDefects() {
     ViewModel.defects.map(d => {
         let category = categorizedDefects.find(cd => {
             return cd.typeId == d.defectTypeId;
         });
         category.defects.push(d);
-        let findDate = dates.filter(date => {
-            return date == d.originDate;
-        });
-        if (findDate.length == 0)
-            dates.push(d.originDate);
+        switch (ViewModel.groupBy) {
+            case GroupChartBy.Day:
+                let findDate = dates.filter(date => {
+                    return date == d.originDate;
+                });
+                if (findDate.length == 0)
+                    dates.push(d.originDate);
+                break;
+            case GroupChartBy.Month:
+                let monthString = '';
+                let findMonth = dates.filter(date => {
+                    let month = moment(d.originDate).month();
+                    monthString = moment().month(month).format('MMMM');
+                    return date == monthString;
+                });
+                if (findMonth.length == 0)
+                    dates.push(monthString);
+                break;
+            case GroupChartBy.Week:
+                let weekString = '';
+                let findWeek = dates.filter(date => {
+                    let week = moment(d.originDate).week();
+                    let start = moment().week(week).day('Sunday');
+                    let end = moment().week(week).day('Saturday');
+                    weekString = `${moment(start).format('M/D/yyyy')} - ${moment(end).format('M/D/yyyy')}`;
+                    return date == weekString;
+                });
+                if (findWeek.length == 0)
+                    dates.push(weekString);
+                break;
+        }
     });
     dates.sort(compare);
 }

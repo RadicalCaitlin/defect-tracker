@@ -1,10 +1,17 @@
 import * as Chart from 'chart.js';
-import moment = require('moment');
+import moment = require("moment");
+
+export enum GroupChartBy {
+    Day = "Day",
+    Week = "Week",
+    Month = "Month"
+}
 
 export interface ViewModel {
     originDate: Date,
     defects: Defect[],
-    defectTypes: Type[]
+    defectTypes: Type[],
+    groupBy: string
 }
 
 export interface Defect {
@@ -30,7 +37,6 @@ export interface Type {
 
 declare const ViewModel: ViewModel;
 
-let dateFormat = 'M/D/yyyy';
 let backgroundColors = [
     'rgba(255, 99, 132, 0.2)',
     'rgba(54, 162, 235, 0.2)',
@@ -64,40 +70,10 @@ let dataSets: any[] = [];
 let dates: any[] = [];
 let defectCountPerDateRange: any[] = [];
 
-initializeDates();
 createDefectTypeArrays();
 mapDefects();
 getCountsForDays();
 createDataSetsForChart();
-
-function compare(a: string, b: string) {
-    let aDate = a.split("/");
-    let bDate = b.split("/");
-
-    if (aDate[2] > bDate[2])
-        return 1;
-
-    if (aDate[2] < bDate[2])
-        return -1;
-
-    if (aDate[2] === bDate[2]) {
-        if (aDate[0] > bDate[0])
-            return 1;
-
-        if (aDate[0] < bDate[0])
-            return -1;
-
-        if (aDate[0] === b[0]) {
-            if (aDate[1] > bDate[1])
-                return 1;
-
-            if (aDate[1] < bDate[1])
-                return -1;
-
-            return 0;
-        }
-    }
-}
 
 function createDataSetsForChart() {
     for (let i = 0; i < ViewModel.defectTypes.length; i++) {
@@ -125,8 +101,16 @@ function getCountsForDays() {
         let defectsByDay: any[] = [];
 
         dates.map(d => {
-            let defectsForDate = cd.defects.filter(function (defect: any) {
-                return defect.originDate == d;
+            let defectsForDate = cd.defects.filter((defect: Defect) => {
+
+                switch (ViewModel.groupBy) {
+                    case GroupChartBy.Day:
+                        return defect.originDate == d;
+                    case GroupChartBy.Month:
+                        return moment(defect.originDate).format('MMMM') == d;
+                    case GroupChartBy.Week:
+                        return GetWeekString(defect.originDate) == d;
+                }
             });
 
             defectsByDay.push(defectsForDate.length);
@@ -134,13 +118,6 @@ function getCountsForDays() {
 
         defectCountPerDateRange.push(defectsByDay);
     });
-}
-
-function initializeDates() {
-    let today = new Date();
-    let formattedDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-
-    dates.push(formattedDate);
 }
 
 function mapDefects() {
@@ -151,15 +128,45 @@ function mapDefects() {
 
         category.defects.push(d)
 
-        let findDate = dates.filter(date => {
-            return date == d.originDate;
-        });
+        switch (ViewModel.groupBy) {
+            case GroupChartBy.Day:
+                let findDate = dates.filter(date => {
+                    return date == d.originDate;
+                });
 
-        if (findDate.length == 0)
-            dates.push(d.originDate);
+                if (findDate.length == 0)
+                    dates.push(d.originDate);
+                break;
+            case GroupChartBy.Month:
+                let monthString = moment(d.originDate).format('MMMM');
+
+                let findMonth = dates.find(date => {
+                    return date == monthString;
+                });
+
+                if (findMonth == null)
+                    dates.push(monthString);
+                break;
+            case GroupChartBy.Week:
+                debugger;
+                let weekString = GetWeekString(d.originDate);
+
+                let findWeek = dates.find(date => {
+                    return date == weekString;
+                });
+
+                if (findWeek == null)
+                    dates.push(weekString);
+                break;
+        }
     });
+}
 
-    dates.sort(compare);
+function GetWeekString(date: Date) {
+    let week = moment(date).week();
+    let start = moment().week(week).day('Sunday');
+    let end = moment().week(week).day('Saturday');
+    return `${moment(start).format('M/D/yyyy')} - ${moment(end).format('M/D/yyyy')}`;
 }
 
 let myChart = new Chart("myChart", {

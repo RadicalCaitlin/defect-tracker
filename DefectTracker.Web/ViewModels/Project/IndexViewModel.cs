@@ -18,5 +18,7 @@ namespace DefectTracker.Web.ViewModels.Project
         public DateTime StartDate { get; set; } = DateTime.UtcNow.AddDays(-30);
 
         public DateTime EndDate { get; set; } = DateTime.UtcNow;
+
+        public GroupChartBy GroupBy { get; set; } = GroupChartBy.Week;
     }
 }

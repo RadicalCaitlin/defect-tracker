@@ -1,5 +1,6 @@
 ﻿using DefectTracker.Contracts.Repositories;
 using DefectTracker.Contracts.Requests;
+using DefectTracker.Core;
 using DefectTracker.Web.ViewModels.Defect;
 using DefectTracker.Web.ViewModels.Project;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +30,7 @@ namespace DefectTracker.Web.Controllers
         }
 
         [Route("Project/{id:int}")]
-        public async Task<IActionResult> Index(int id, DateTime? startDate = null, DateTime? endDate = null)
+        public async Task<IActionResult> Index(int id, DateTime? startDate = null, DateTime? endDate = null, GroupChartBy groupBy = GroupChartBy.Week)
         {
             if (id == 0)
                 return RedirectToAction("Index", "Home");
@@ -58,24 +59,25 @@ namespace DefectTracker.Web.Controllers
             };
 
             var filteredDefects = defects
-                .Where(d => d.OriginDateCreatedOffset.ToUniversalTime().Date >= model.StartDate 
+                .Where(d => d.OriginDateCreatedOffset.ToUniversalTime().Date >= model.StartDate
                 && d.OriginDateCreatedOffset.ToUniversalTime().Date <= model.EndDate)
                 .OrderBy(d => d.OriginDateCreatedOffset);
 
-                model.Bugs = await _projectRepository.GetBugsByProjectIdAsync(id);
-                model.Defects = filteredDefects.Select(x => new DefectsForChart
-                {
-                    //CreatedByUserId = x.CreatedByUserId,
-                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
-                    DefectQualifierTypeId = x.DefectQualifierTypeId,
-                    DefectTypeId = x.DefectTypeId,
-                    Id = x.Id,
-                    ProjectId = x.ProjectId,
-                    BugId = x.BugId,
-                    DefectModelTypeId = x.DefectModelTypeId
-                });
-                model.DefectTypes = await _defectRepository.GetDefectTypesAsync();
-                model.Project = projectForChart;
+            model.Bugs = await _projectRepository.GetBugsByProjectIdAsync(id);
+            model.Defects = filteredDefects.Select(x => new DefectsForChart
+            {
+                //CreatedByUserId = x.CreatedByUserId,
+                OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
+                DefectQualifierTypeId = x.DefectQualifierTypeId,
+                DefectTypeId = x.DefectTypeId,
+                Id = x.Id,
+                ProjectId = x.ProjectId,
+                BugId = x.BugId,
+                DefectModelTypeId = x.DefectModelTypeId
+            });
+            model.DefectTypes = await _defectRepository.GetDefectTypesAsync();
+            model.Project = projectForChart;
+            model.GroupBy = groupBy;
 
             return View(model);
         }

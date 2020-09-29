@@ -12,8 +12,46 @@
                 <a asp-area="" asp-controller="Project" asp-action="Manage" asp-route-projectId="@Model.Project.Id" class="btn btn-link">Manage Project</a>
             </div>
             <div class="d-flex">
+                <div class="dropdown mr-3">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Group By @Model.GroupBy
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if (Model.GroupBy != DefectTracker.Core.GroupChartBy.Day)
+                        {
+                            <form class="form-inline" action="/Project/@Model.Project.Id" method="get">
+                                <input type="hidden" name="id" value="@Model.Project.Id" />
+                                <input type="hidden" name="startDate" value="@Model.StartDate" />
+                                <input type="hidden" name="endDate" value="@Model.EndDate" />
+                                <input type="hidden" name="groupBy" value="@DefectTracker.Core.GroupChartBy.Day" />
+                                <button class="dropdown-item" href="#">Group By @DefectTracker.Core.GroupChartBy.Day</button>
+                            </form>
+                        }
+                        @if (Model.GroupBy != DefectTracker.Core.GroupChartBy.Week)
+                        {
+                            <form class="form-inline" action="/Project/@Model.Project.Id" method="get">
+                                <input type="hidden" name="id" value="@Model.Project.Id" />
+                                <input type="hidden" name="startDate" value="@Model.StartDate" />
+                                <input type="hidden" name="endDate" value="@Model.EndDate" />
+                                <input type="hidden" name="groupBy" value="@DefectTracker.Core.GroupChartBy.Week" />
+                                <button class="dropdown-item" href="#">Group By @DefectTracker.Core.GroupChartBy.Week</button>
+                            </form>
+                        }
+                        @if (Model.GroupBy != DefectTracker.Core.GroupChartBy.Month)
+                        {
+                            <form class="form-inline" action="/Project/@Model.Project.Id" method="get">
+                                <input type="hidden" name="id" value="@Model.Project.Id" />
+                                <input type="hidden" name="startDate" value="@Model.StartDate" />
+                                <input type="hidden" name="endDate" value="@Model.EndDate" />
+                                <input type="hidden" name="groupBy" value="@DefectTracker.Core.GroupChartBy.Month" />
+                                <button class="dropdown-item" href="#">Group By @DefectTracker.Core.GroupChartBy.Month</button>
+                            </form>
+                        }
+                    </div>
+                </div>
                 <form class="form-inline" action="/Project/@Model.Project.Id" method="get">
                     <label class="mr-1">Date Range</label>
+                    <input type="hidden" name="groupBy" value="@Model.GroupBy" />
                     <input type="hidden" name="id" value="@Model.Project.Id" />
                     <input type="date" class="form-control mr-1" name="startDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
                     <input type="date" class="form-control mr-1" name="endDate" value="@Model.EndDate.ToString("yyyy-MM-dd")" />
@@ -101,7 +139,8 @@
         var ViewModel = {
             originDate: '@Model.Project.OriginDate',
             defects: @Html.Raw(Json.Serialize(Model.Defects)),
-            defectTypes: @Html.Raw(Json.Serialize(Model.DefectTypes))
+            defectTypes: @Html.Raw(Json.Serialize(Model.DefectTypes)),
+            groupBy: '@Model.GroupBy'
         };
 
     </script>
