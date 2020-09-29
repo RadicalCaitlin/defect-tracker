@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,10 +29,22 @@ namespace DefectTracker.Web.Controllers
         }
 
         [Route("Project/{id:int}")]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id, DateTime? startDate = null, DateTime? endDate = null)
         {
             if (id == 0)
                 return RedirectToAction("Index", "Home");
+
+            var model = new IndexViewModel();
+
+            if (startDate != null)
+            {
+                model.StartDate = startDate.GetValueOrDefault();
+            }
+
+            if (endDate != null)
+            {
+                model.EndDate = endDate.GetValueOrDefault();
+            }
 
             var project = await _projectRepository.GetProjectByIdAsync(id);
             var defects = await _defectRepository.GetDefectsByProjectIdAsync(id);
@@ -44,10 +57,13 @@ namespace DefectTracker.Web.Controllers
                 OriginDate = project.OriginDateOffset.ToString("MM/dd/yyyy")
             };
 
-            var model = new IndexViewModel
-            {
-                Bugs = await _projectRepository.GetBugsByProjectIdAsync(id),
-                Defects = defects.OrderBy(d => d.OriginDateCreatedOffset).Select(x => new DefectsForChart
+            var filteredDefects = defects
+                .Where(d => d.OriginDateCreatedOffset.ToUniversalTime().Date >= model.StartDate 
+                && d.OriginDateCreatedOffset.ToUniversalTime().Date <= model.EndDate)
+                .OrderBy(d => d.OriginDateCreatedOffset);
+
+                model.Bugs = await _projectRepository.GetBugsByProjectIdAsync(id);
+                model.Defects = filteredDefects.Select(x => new DefectsForChart
                 {
                     //CreatedByUserId = x.CreatedByUserId,
                     OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
@@ -57,10 +73,9 @@ namespace DefectTracker.Web.Controllers
                     ProjectId = x.ProjectId,
                     BugId = x.BugId,
                     DefectModelTypeId = x.DefectModelTypeId
-                }),
-                DefectTypes = await _defectRepository.GetDefectTypesAsync(),
-                Project = projectForChart
-            };
+                });
+                model.DefectTypes = await _defectRepository.GetDefectTypesAsync();
+                model.Project = projectForChart;
 
             return View(model);
         }
