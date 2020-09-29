@@ -3,7 +3,7 @@ import Util from './util'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): modal.js
+ * Bootstrap (v4.1.3): modal.Global
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -398,7 +398,7 @@ const Modal = (($) => {
 
     // ----------------------------------------------------------------------
     // the following methods are used to handle overflowing modals
-    // todo (fat): these should probably be refactored out of modal.js
+    // todo (fat): these should probably be refactored out of modal.Global
     // ----------------------------------------------------------------------
 
     _adjustDialog() {

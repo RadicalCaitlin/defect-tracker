@@ -59,7 +59,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): scrollspy.js
+   * Bootstrap (v4.1.3): scrollspy.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -376,4 +376,4 @@
   return ScrollSpy;
 
 })));
-//# sourceMappingURL=scrollspy.js.map
+//# sourceMappingURL=scrollspy.Global.map

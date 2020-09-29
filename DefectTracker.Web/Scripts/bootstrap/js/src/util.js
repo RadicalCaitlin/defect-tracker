@@ -2,7 +2,7 @@ import $ from 'jquery'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): util.js
+ * Bootstrap (v4.1.3): util.Global
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */

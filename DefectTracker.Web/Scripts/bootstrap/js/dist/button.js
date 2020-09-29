@@ -24,7 +24,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): button.js
+   * Bootstrap (v4.1.3): button.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -189,4 +189,4 @@
   return Button;
 
 })));
-//# sourceMappingURL=button.js.map
+//# sourceMappingURL=button.Global.map

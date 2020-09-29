@@ -25,7 +25,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tab.js
+   * Bootstrap (v4.1.3): tab.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -275,4 +275,4 @@
   return Tab;
 
 })));
-//# sourceMappingURL=tab.js.map
+//# sourceMappingURL=tab.Global.map

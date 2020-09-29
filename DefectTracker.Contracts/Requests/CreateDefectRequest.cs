@@ -20,8 +20,8 @@ namespace DefectTracker.Contracts.Requests
         public DateTimeOffset OriginDateCreatedOffset { get; set; }
         
 
-        [Required]
-        public string CreatedByUserId { get; set; }
+        //[Required]
+        //public string CreatedByUserId { get; set; }
 
         [Required]
         public int ProjectId { get; set; }
@@ -45,7 +45,7 @@ namespace DefectTracker.Contracts.Requests
                 DefectTypeId = DefectTypeId,
                 DefectQualifierTypeId = DefectQualifierId,
                 DateCreatedOffset = DateTime.UtcNow,
-                CreatedByUserId = CreatedByUserId,
+                //CreatedByUserId = CreatedByUserId,
                 ProjectId = ProjectId,
                 BugId = BugId,
                 DefectModelTypeId = DefectModelTypeId,

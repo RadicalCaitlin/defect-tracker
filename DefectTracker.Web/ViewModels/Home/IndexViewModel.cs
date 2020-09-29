@@ -5,6 +5,6 @@ namespace DefectTracker.Web.ViewModels.Home
 {
     public class IndexViewModel
     {
-        public IEnumerable<Projects> Projects { get; set; }
+        public List<Projects> Projects { get; set; }
     }
 }

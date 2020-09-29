@@ -59,7 +59,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): carousel.js
+   * Bootstrap (v4.1.3): carousel.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -564,4 +564,4 @@
   return Carousel;
 
 })));
-//# sourceMappingURL=carousel.js.map
+//# sourceMappingURL=carousel.Global.map

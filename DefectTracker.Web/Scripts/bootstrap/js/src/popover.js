@@ -3,7 +3,7 @@ import Tooltip from './tooltip'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): popover.js
+ * Bootstrap (v4.1.3): popover.Global
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -117,7 +117,7 @@ const Popover = (($) => {
     setContent() {
       const $tip = $(this.getTipElement())
 
-      // We use append for html objects to maintain js events
+      // We use append for html objects to maintain Global events
       this.setElementContent($tip.find(Selector.TITLE), this.getTitle())
       let content = this._getContent()
       if (typeof content === 'function') {

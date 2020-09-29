@@ -31,12 +31,12 @@ namespace DefectTracker.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int projectId, int bugId, int defectModelId)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var bug = await _projectRepository.GetProjectBugByIdAsync(bugId);
 
             var model = new CreateDefectRequest
             {
-                CreatedByUserId = user.Id,
+                //CreatedByUserId = user.Id,
                 ProjectId = projectId,
                 DefectQualifiers = await _defectRepository.GetDefectQualifiersAsync(),
                 DefectTypes = await _defectRepository.GetDefectTypesAsync(),
@@ -59,9 +59,7 @@ namespace DefectTracker.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["CreateDefectRequest"] = request;
-                TempData["ViewData"] = ViewData;
-                return View();
+                return View(request);
             }
 
             var defect = await _defectRepository.CreateDefectAsync(request.CreateDefect());

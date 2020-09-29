@@ -9,7 +9,7 @@
         <h2>Create Defect</h2>
         <hr/>
         <form method="post">
-            <input asp-for="@Model.CreatedByUserId" type="hidden" />
+            @*<input asp-for="@Model.CreatedByUserId" type="hidden" />*@
             <input asp-for="@Model.BugId" type="hidden" />
             <input asp-for="@Model.DefectModelTypeId" type="hidden" />
             <input asp-for="@Model.OriginDateCreatedOffset" type="hidden" />

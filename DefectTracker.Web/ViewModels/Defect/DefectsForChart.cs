@@ -8,7 +8,7 @@
 
         public int DefectQualifierTypeId { get; set; }
 
-        public string DateCreated { get; set; }
+        public string OriginDate { get; set; }
 
         public string CreatedByUserId { get; set; }
 

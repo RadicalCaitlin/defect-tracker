@@ -24,7 +24,7 @@ namespace DefectTracker.Contracts.Requests
         {
             var project = new Projects
             {
-                CreatedByUserId = UserId,
+                //CreatedByUserId = UserId,
                 Name = Name,
                 DateCreatedOffset = DateTime.UtcNow,
                 OriginDateOffset = OriginDateOffset

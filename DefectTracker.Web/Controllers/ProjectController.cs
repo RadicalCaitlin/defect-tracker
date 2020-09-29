@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace DefectTracker.Web.Controllers
 {
-    [Authorize]
     public class ProjectController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -38,7 +37,7 @@ namespace DefectTracker.Web.Controllers
             var defects = await _defectRepository.GetDefectsByProjectIdAsync(id);
             var projectForChart = new ProjectForChart
             {
-                CreatedByUserId = project.CreatedByUserId,
+                //CreatedByUserId = project.CreatedByUserId,
                 DateCreated = project.DateCreatedOffset.ToString("MM/dd/yyyy"),
                 Id = project.Id,
                 Name = project.Name,
@@ -48,10 +47,10 @@ namespace DefectTracker.Web.Controllers
             var model = new IndexViewModel
             {
                 Bugs = await _projectRepository.GetBugsByProjectIdAsync(id),
-                Defects = defects.Select(x => new DefectsForChart
+                Defects = defects.OrderBy(d => d.OriginDateCreatedOffset).Select(x => new DefectsForChart
                 {
-                    CreatedByUserId = x.CreatedByUserId,
-                    DateCreated = x.DateCreatedOffset.ToString("MM/dd/yyyy"),
+                    //CreatedByUserId = x.CreatedByUserId,
+                    OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
                     DefectQualifierTypeId = x.DefectQualifierTypeId,
                     DefectTypeId = x.DefectTypeId,
                     Id = x.Id,

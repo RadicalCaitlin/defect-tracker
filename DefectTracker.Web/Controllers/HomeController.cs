@@ -5,6 +5,8 @@ using DefectTracker.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Identity;
 using DefectTracker.Contracts.Repositories;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using DefectTracker.Core;
 
 namespace DefectTracker.Web.Controllers
 {
@@ -21,11 +23,9 @@ namespace DefectTracker.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-
             var model = new IndexViewModel
             {
-                Projects = await _projectRepository.GetProjectsByUserIdAsync(user.Id)
+                Projects = await _projectRepository.GetAllProjectsAsync()
             };
 
             return View(model);

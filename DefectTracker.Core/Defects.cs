@@ -14,7 +14,7 @@ namespace DefectTracker.Core
 
         public DateTimeOffset DateCreatedOffset { get; set; }
 
-        public string CreatedByUserId { get; set; }
+        //public string CreatedByUserId { get; set; }
 
         public int ProjectId { get; set; }
 

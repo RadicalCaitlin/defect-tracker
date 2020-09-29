@@ -14,6 +14,14 @@
 	SELECT Id = 7, [Name] = 'Documentation'
 	UNION
 	SELECT Id = 8, [Name] = 'Algorithm'
+	UNION
+	SELECT Id = 9, [Name] = 'Bug'
+	UNION
+	SELECT Id = 10, [Name] = 'Software Decay'
+	UNION
+	SELECT Id = 11, [Name] = 'Invalid Report'
+	UNION
+	SELECT Id = 12, [Name] = 'Other'
 ) 
 MERGE INTO dbo.DefectTypes AS TARGET 
 USING [DefectTypes] AS SOURCE ON TARGET.Id = SOURCE.Id

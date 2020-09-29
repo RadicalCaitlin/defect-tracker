@@ -60,7 +60,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): dropdown.js
+   * Bootstrap (v4.1.3): dropdown.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -188,7 +188,7 @@
 
         if (showEvent.isDefaultPrevented()) {
           return;
-        } // Disable totally Popper.js for Dropdown in Navbar
+        } // Disable totally Popper.Global for Dropdown in Navbar
 
 
         if (!this._inNavbar) {
@@ -197,7 +197,7 @@
            * Popper - https://popper.js.org
            */
           if (typeof Popper === 'undefined') {
-            throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
+            throw new TypeError('Bootstrap dropdown require Popper.Global (https://popper.js.org)');
           }
 
           var referenceElement = this._element;
@@ -338,7 +338,7 @@
             preventOverflow: {
               boundariesElement: this._config.boundary
             }
-          } // Disable Popper.js if we have a static display
+          } // Disable Popper.Global if we have a static display
 
         };
 
@@ -549,4 +549,4 @@
   return Dropdown;
 
 })));
-//# sourceMappingURL=dropdown.js.map
+//# sourceMappingURL=dropdown.Global.map

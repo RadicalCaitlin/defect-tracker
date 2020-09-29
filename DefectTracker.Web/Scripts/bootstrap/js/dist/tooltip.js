@@ -60,7 +60,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tooltip.js
+   * Bootstrap (v4.1.3): tooltip.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -160,7 +160,7 @@
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap tooltips require Popper.js (https://popper.js.org)');
+          throw new TypeError('Bootstrap tooltips require Popper.Global (https://popper.js.org)');
         } // private
 
 
@@ -731,4 +731,4 @@
   return Tooltip;
 
 })));
-//# sourceMappingURL=tooltip.js.map
+//# sourceMappingURL=tooltip.Global.map

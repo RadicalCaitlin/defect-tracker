@@ -59,7 +59,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): collapse.js
+   * Bootstrap (v4.1.3): collapse.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -428,4 +428,4 @@
   return Collapse;
 
 })));
-//# sourceMappingURL=collapse.js.map
+//# sourceMappingURL=collapse.Global.map

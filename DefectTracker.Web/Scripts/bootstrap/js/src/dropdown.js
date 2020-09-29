@@ -4,7 +4,7 @@ import Util from './util'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): dropdown.js
+ * Bootstrap (v4.1.3): dropdown.Global
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -145,14 +145,14 @@ const Dropdown = (($) => {
         return
       }
 
-      // Disable totally Popper.js for Dropdown in Navbar
+      // Disable totally Popper.Global for Dropdown in Navbar
       if (!this._inNavbar) {
         /**
          * Check for Popper dependency
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)')
+          throw new TypeError('Bootstrap dropdown require Popper.Global (https://popper.js.org)')
         }
 
         let referenceElement = this._element
@@ -300,7 +300,7 @@ const Dropdown = (($) => {
         }
       }
 
-      // Disable Popper.js if we have a static display
+      // Disable Popper.Global if we have a static display
       if (this._config.display === 'static') {
         popperConfig.modifiers.applyStyle = {
           enabled: false

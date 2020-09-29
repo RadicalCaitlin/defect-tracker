@@ -64,12 +64,15 @@ namespace DefectTracker.Repositories
         => await _dbContext.Projects.SingleOrDefaultAsync(p => p.Id == projectId);
 
         public async Task<IEnumerable<Projects>> GetProjectsByUserIdAsync(string currentUserId)
-            => await _dbContext.Projects.Where(p => p.CreatedByUserId == currentUserId).ToListAsync();
+            => await _dbContext.Projects.ToListAsync();
 
         public async Task<IEnumerable<ProjectUsers>> GetProjectUsersByProjectIdAsync(int projectId)
         => await _dbContext.ProjectUsers.Where(u => u.ProjectId == projectId).ToListAsync();
 
         public async Task<IEnumerable<Tasks>> GetTasksByProjectIdAsync(int projectId)
         => await _dbContext.Tasks.Where(t => t.ProjectId == projectId).ToListAsync();
+
+        public async Task<List<Projects>> GetAllProjectsAsync()
+            => await _dbContext.Projects.ToListAsync();
     }
 }

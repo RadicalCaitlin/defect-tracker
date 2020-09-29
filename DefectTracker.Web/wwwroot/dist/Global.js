@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/Global/index.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./js/main.js":
-/*!********************!*\
-  !*** ./js/main.js ***!
-  \********************/
+/***/ "./src/Global/index.ts":
+/*!*****************************!*\
+  !*** ./src/Global/index.ts ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ../scss/main.scss */ \"./scss/main.scss\");\n\n//# sourceURL=webpack:///./js/main.js?");
+eval("__webpack_require__(/*! ./scss/main.scss */ \"./src/Global/scss/main.scss\");\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvR2xvYmFsL2luZGV4LnRzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vL3NyYy9HbG9iYWwvaW5kZXgudHM/MjI2OCJdLCJzb3VyY2VzQ29udGVudCI6WyJyZXF1aXJlKCcuL3Njc3MvbWFpbi5zY3NzJyk7Il0sIm1hcHBpbmdzIjoiQUFBQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/Global/index.ts\n");
 
 /***/ }),
 
-/***/ "./scss/main.scss":
-/*!************************!*\
-  !*** ./scss/main.scss ***!
-  \************************/
+/***/ "./src/Global/scss/main.scss":
+/*!***********************************!*\
+  !*** ./src/Global/scss/main.scss ***!
+  \***********************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./scss/main.scss?");
+eval("// extracted by mini-css-extract-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvR2xvYmFsL3Njc3MvbWFpbi5zY3NzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL0dsb2JhbC9zY3NzL21haW4uc2Nzcz9jOWIyIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpbiJdLCJtYXBwaW5ncyI6IkFBQUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/Global/scss/main.scss\n");
 
 /***/ })
 

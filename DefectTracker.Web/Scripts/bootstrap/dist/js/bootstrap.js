@@ -70,7 +70,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): util.js
+   * Bootstrap (v4.1.3): util.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -202,7 +202,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): alert.js
+   * Bootstrap (v4.1.3): alert.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -377,7 +377,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): button.js
+   * Bootstrap (v4.1.3): button.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -541,7 +541,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): carousel.js
+   * Bootstrap (v4.1.3): carousel.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1045,7 +1045,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): collapse.js
+   * Bootstrap (v4.1.3): collapse.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1413,7 +1413,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): dropdown.js
+   * Bootstrap (v4.1.3): dropdown.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1541,7 +1541,7 @@
 
         if (showEvent.isDefaultPrevented()) {
           return;
-        } // Disable totally Popper.js for Dropdown in Navbar
+        } // Disable totally Popper.Global for Dropdown in Navbar
 
 
         if (!this._inNavbar) {
@@ -1550,7 +1550,7 @@
            * Popper - https://popper.js.org
            */
           if (typeof Popper === 'undefined') {
-            throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
+            throw new TypeError('Bootstrap dropdown require Popper.Global (https://popper.js.org)');
           }
 
           var referenceElement = this._element;
@@ -1691,7 +1691,7 @@
             preventOverflow: {
               boundariesElement: this._config.boundary
             }
-          } // Disable Popper.js if we have a static display
+          } // Disable Popper.Global if we have a static display
 
         };
 
@@ -1901,7 +1901,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): modal.js
+   * Bootstrap (v4.1.3): modal.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2290,7 +2290,7 @@
         }
       }; // ----------------------------------------------------------------------
       // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
+      // todo (fat): these should probably be refactored out of modal.Global
       // ----------------------------------------------------------------------
 
 
@@ -2472,7 +2472,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tooltip.js
+   * Bootstrap (v4.1.3): tooltip.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2572,7 +2572,7 @@
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap tooltips require Popper.js (https://popper.js.org)');
+          throw new TypeError('Bootstrap tooltips require Popper.Global (https://popper.js.org)');
         } // private
 
 
@@ -3142,7 +3142,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): popover.js
+   * Bootstrap (v4.1.3): popover.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3225,7 +3225,7 @@
       };
 
       _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
+        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain Global events
 
         this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
 
@@ -3339,7 +3339,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): scrollspy.js
+   * Bootstrap (v4.1.3): scrollspy.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3655,7 +3655,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tab.js
+   * Bootstrap (v4.1.3): tab.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3904,7 +3904,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): index.js
+   * Bootstrap (v4.1.3): index.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3941,4 +3941,4 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=bootstrap.js.map
+//# sourceMappingURL=bootstrap.Global.map

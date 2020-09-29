@@ -24,23 +24,23 @@
                     <a asp-area="" asp-controller="Project" asp-action="CreateBug" asp-route-projectId="@Model.Project.Id" class="btn btn-primary">Add Bug</a>
                     @if (Model.Bugs.Any())
                     {
-                    <table class="table table-striped mt-4">
-                        <tr>
-                            <th>Work Item Id</th>
-                            <th>Title</th>
-                            <th>Origin Date</th>
-                            <th></th>
-                        </tr>
-                        @foreach (var bug in Model.Bugs)
-                        {
+                        <table class="table table-striped mt-4">
                             <tr>
-                                <td>@bug.WorkItemId</td>
-                                <td>@bug.Title</td>
-                                <td>@bug.OriginDateOffset.ToString("MM/dd/yyyy")</td>
-                                <td></td>
+                                <th>Work Item Id</th>
+                                <th>Title</th>
+                                <th>Origin Date</th>
+                                <th></th>
                             </tr>
-                        }
-                    </table>
+                            @foreach (var bug in Model.Bugs)
+                            {
+                                <tr>
+                                    <td>@bug.WorkItemId</td>
+                                    <td>@bug.Title</td>
+                                    <td>@bug.OriginDateOffset.ToString("MM/dd/yyyy")</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </table>
                     }
                     else
                     {
@@ -55,7 +55,7 @@
                 <canvas id="myChart" width="400" height="150" class="mb-4"></canvas>
                 <hr />
                 <h5>Bugs To Be Classified</h5>
-                @{ 
+                @{
                     var classifiedBugs = Model.Defects.Select(d => d.BugId).ToList();
                     var unclassifiedBugs = Model.Bugs.Where(b => !classifiedBugs.Contains(b.Id));
                 }
@@ -87,11 +87,14 @@
 @section Scripts {
     <script src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <script>
-        var originDate = '@Model.Project.OriginDate';
-        var defects = @Html.Raw(Json.Serialize(Model.Defects));
-        var defectTypes = @Html.Raw(Json.Serialize(Model.DefectTypes));
+        var ViewModel = {
+            originDate: '@Model.Project.OriginDate',
+            defects: @Html.Raw(Json.Serialize(Model.Defects)),
+            defectTypes: @Html.Raw(Json.Serialize(Model.DefectTypes))
+        };
+
     </script>
-    <script src="~/dist/defectChart.bundle.js"></script>
+    <script src="~/dist/DefectChart.js"></script>
 }
 
 

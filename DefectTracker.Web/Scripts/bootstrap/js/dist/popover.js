@@ -65,7 +65,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): popover.js
+   * Bootstrap (v4.1.3): popover.Global
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -148,7 +148,7 @@
       };
 
       _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
+        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain Global events
 
         this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
 
@@ -263,4 +263,4 @@
   return Popover;
 
 })));
-//# sourceMappingURL=popover.js.map
+//# sourceMappingURL=popover.Global.map
