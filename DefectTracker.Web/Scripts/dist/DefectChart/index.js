@@ -45,27 +45,6 @@ createDefectTypeArrays();
 mapDefects();
 getCountsForDays();
 createDataSetsForChart();
-function compare(a, b) {
-    let aDate = a.split("/");
-    let bDate = b.split("/");
-    if (aDate[2] > bDate[2])
-        return 1;
-    if (aDate[2] < bDate[2])
-        return -1;
-    if (aDate[2] === bDate[2]) {
-        if (aDate[0] > bDate[0])
-            return 1;
-        if (aDate[0] < bDate[0])
-            return -1;
-        if (aDate[0] === b[0]) {
-            if (aDate[1] > bDate[1])
-                return 1;
-            if (aDate[1] < bDate[1])
-                return -1;
-            return 0;
-        }
-    }
-}
 function createDataSetsForChart() {
     for (let i = 0; i < ViewModel.defectTypes.length; i++) {
         dataSets.push({
@@ -89,8 +68,15 @@ function getCountsForDays() {
     categorizedDefects.map(cd => {
         let defectsByDay = [];
         dates.map(d => {
-            let defectsForDate = cd.defects.filter(function (defect) {
-                return defect.originDate == d;
+            let defectsForDate = cd.defects.filter((defect) => {
+                switch (ViewModel.groupBy) {
+                    case GroupChartBy.Day:
+                        return defect.originDate == d;
+                    case GroupChartBy.Month:
+                        return moment(defect.originDate).format('MMMM') == d;
+                    case GroupChartBy.Week:
+                        return GetWeekString(defect.originDate) == d;
+                }
             });
             defectsByDay.push(defectsForDate.length);
         });
@@ -112,30 +98,30 @@ function mapDefects() {
                     dates.push(d.originDate);
                 break;
             case GroupChartBy.Month:
-                let monthString = '';
-                let findMonth = dates.filter(date => {
-                    let month = moment(d.originDate).month();
-                    monthString = moment().month(month).format('MMMM');
+                let monthString = moment(d.originDate).format('MMMM');
+                let findMonth = dates.find(date => {
                     return date == monthString;
                 });
-                if (findMonth.length == 0)
+                if (findMonth == null)
                     dates.push(monthString);
                 break;
             case GroupChartBy.Week:
-                let weekString = '';
-                let findWeek = dates.filter(date => {
-                    let week = moment(d.originDate).week();
-                    let start = moment().week(week).day('Sunday');
-                    let end = moment().week(week).day('Saturday');
-                    weekString = `${moment(start).format('M/D/yyyy')} - ${moment(end).format('M/D/yyyy')}`;
+                debugger;
+                let weekString = GetWeekString(d.originDate);
+                let findWeek = dates.find(date => {
                     return date == weekString;
                 });
-                if (findWeek.length == 0)
+                if (findWeek == null)
                     dates.push(weekString);
                 break;
         }
     });
-    dates.sort(compare);
+}
+function GetWeekString(date) {
+    let week = moment(date).week();
+    let start = moment().week(week).day('Sunday');
+    let end = moment().week(week).day('Saturday');
+    return `${moment(start).format('M/D/yyyy')} - ${moment(end).format('M/D/yyyy')}`;
 }
 let myChart = new Chart("myChart", {
     type: 'line',
