@@ -1,4 +1,6 @@
-﻿namespace DefectTracker.Web.ViewModels.Project
+﻿using System;
+
+namespace DefectTracker.Web.ViewModels.Project
 {
     public class ProjectForChart
     {

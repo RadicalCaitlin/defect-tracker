@@ -1,4 +1,4 @@
-﻿@model DefectTracker.Contracts.Requests.CreateBugRequest
+﻿@model DefectTracker.Web.Models.BugViewModels.CreateBugRequest
 
 @{
     ViewData["Title"] = "CreateBug";
@@ -11,7 +11,7 @@
             <input asp-for="@Model.ProjectId" type="hidden" />
             <div class="form-group">
                 <label asp-for="@Model.WorkItemId"></label>
-                <input asp-for="@Model.WorkItemId" class="form-control" autofocus/>
+                <input asp-for="@Model.WorkItemId" class="form-control" autofocus />
                 <span asp-validation-for="@Model.WorkItemId" class="text-danger"></span>
             </div>
             <div class="form-group">

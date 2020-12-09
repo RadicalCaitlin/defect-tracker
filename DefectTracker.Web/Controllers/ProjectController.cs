@@ -1,32 +1,33 @@
-﻿using DefectTracker.Contracts.Repositories;
-using DefectTracker.Contracts.Requests;
-using DefectTracker.Core;
+﻿using DefectTracker.Core;
+using DefectTracker.Web.Models.AreaViewModels;
+using DefectTracker.Web.Models.BugViewModels;
+using DefectTracker.Web.Models.ProjectViewModels;
 using DefectTracker.Web.ViewModels.Defect;
 using DefectTracker.Web.ViewModels.Project;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace DefectTracker.Web.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IDefectRepository _defectRepository;
-        private readonly IProjectRepository _projectRepository;
+        private readonly DefectTrackerDbContext _dbContext;
 
         public ProjectController(
             UserManager<IdentityUser> userManager,
-            IDefectRepository defectRepository,
-            IProjectRepository projectRepository)
+            DefectTrackerDbContext dbContext)
         {
             _userManager = userManager;
-            _defectRepository = defectRepository;
-            _projectRepository = projectRepository;
+            _dbContext = dbContext;
         }
 
         [Route("Project/{id:int}")]
@@ -47,11 +48,11 @@ namespace DefectTracker.Web.Controllers
                 model.EndDate = endDate.GetValueOrDefault();
             }
 
-            var project = await _projectRepository.GetProjectByIdAsync(id);
-            var defects = await _defectRepository.GetDefectsByProjectIdAsync(id);
+            var project = await _dbContext.Projects.SingleOrDefaultAsync(p => p.Id == id);
+            var defects = await _dbContext.Defects.Where(d => d.ProjectId == id).ToListAsync();
             var projectForChart = new ProjectForChart
             {
-                //CreatedByUserId = project.CreatedByUserId,
+                CreatedByUserId = project.CreatedByUserId,
                 DateCreated = project.DateCreatedOffset.ToString("MM/dd/yyyy"),
                 Id = project.Id,
                 Name = project.Name,
@@ -63,10 +64,10 @@ namespace DefectTracker.Web.Controllers
                 && d.OriginDateCreatedOffset.ToUniversalTime().Date <= model.EndDate)
                 .OrderBy(d => d.OriginDateCreatedOffset);
 
-            model.Bugs = await _projectRepository.GetBugsByProjectIdAsync(id);
+            model.Bugs = await _dbContext.ProjectBugs.Where(pb => pb.ProjectId == id).ToListAsync();
             model.Defects = filteredDefects.Select(x => new DefectsForChart
             {
-                //CreatedByUserId = x.CreatedByUserId,
+                CreatedByUserId = x.CreatedByUserId,
                 OriginDate = x.OriginDateCreatedOffset.ToString("MM/dd/yyyy"),
                 DefectQualifierTypeId = x.DefectQualifierTypeId,
                 DefectTypeId = x.DefectTypeId,
@@ -75,7 +76,7 @@ namespace DefectTracker.Web.Controllers
                 BugId = x.BugId,
                 DefectModelTypeId = x.DefectModelTypeId
             });
-            model.DefectTypes = await _defectRepository.GetDefectTypesAsync();
+            model.DefectTypes = await _dbContext.DefectTypes.ToListAsync();
             model.Project = projectForChart;
             model.GroupBy = groupBy;
 
@@ -125,13 +126,19 @@ namespace DefectTracker.Web.Controllers
             if (id == 0)
                 return RedirectToAction("Index", "Home");
 
+            var project = await _dbContext.Projects
+                .Include(p => p.Activities)
+                .Include(p => p.ProjectAreas)
+                .SingleOrDefaultAsync(p => p.Id == id);
+
+
             var model = new ManageViewModel
             {
-                Project = await _projectRepository.GetProjectByIdAsync(id),
-                Activities = await _projectRepository.GetActivitiesByProjectIdAsync(id),
-                Areas = await _projectRepository.GetAreasByProjectIdAsync(id),
-                Tasks = await _projectRepository.GetTasksByProjectIdAsync(id),
-                Users = await _projectRepository.GetProjectUsersByProjectIdAsync(id)
+                Project = project,
+                Activities = project.Activities,
+                Areas = project.ProjectAreas,
+                Tasks = project.Tasks,
+                Users = project.ProjectUsers
             };
 
             if (TempData["CreateAreaRequest"] != null)
@@ -161,7 +168,10 @@ namespace DefectTracker.Web.Controllers
                 return View();
             }
 
-            var project = await _projectRepository.CreateProjectAsync(request.CreateProject());
+            var project = request.CreateProject();
+
+            _dbContext.Projects.Add(project);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Index", "Project", new { id = project.Id });
         }
@@ -176,7 +186,8 @@ namespace DefectTracker.Web.Controllers
                 return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
             }
 
-            var area = await _projectRepository.CreateProjectAreasAsync(request.CreateProjectArea());
+            _dbContext.ProjectAreas.Add(request.CreateProjectArea());
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
         }
@@ -192,7 +203,8 @@ namespace DefectTracker.Web.Controllers
                 return RedirectToAction("CreateBug", "Project", new { projectId = request.ProjectId });
             }
 
-            var bug = await _projectRepository.CreateProjectBugAsync(request.CreateBug());
+            _dbContext.ProjectBugs.Add(request.CreateBug());
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("CreateBug", "Project", new { projectId = request.ProjectId });
         }
@@ -207,7 +219,8 @@ namespace DefectTracker.Web.Controllers
                 return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
             }
 
-            var area = await _projectRepository.CreateProjectUserAsync(request.CreateProjectUser());
+            _dbContext.ProjectUsers.Add(request.CreateProjectUser());
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Manage", "Project", new { id = request.ProjectId });
         }

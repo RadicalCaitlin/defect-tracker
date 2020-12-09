@@ -1,4 +1,4 @@
-﻿@model DefectTracker.Contracts.Requests.CreateProjectRequest
+﻿@model DefectTracker.Web.Models.ProjectViewModels.CreateProjectRequest
 
 @{
     ViewData["Title"] = "Create";
@@ -7,7 +7,7 @@
 <div class="row mt-4">
     <div class="col col-4 m-auto">
         <h2>Create Project</h2>
-        <form asp-controller="Project" asp-action="Manage" method="post">
+        <form method="post">
             <input asp-for="@Model.UserId" type="hidden" />
             <div class="form-group">
                 <label asp-for="@Model.Name"></label>

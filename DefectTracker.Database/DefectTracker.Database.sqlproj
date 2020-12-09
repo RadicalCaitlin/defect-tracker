@@ -76,6 +76,13 @@
     <Build Include="dbo\Tables\Core\Types\DefectTypes.sql" />
     <Build Include="dbo\Tables\Core\ProjectBugs.sql" />
     <Build Include="dbo\Tables\Core\Types\DefectModelTypes.sql" />
+    <Build Include="dbo\Tables\AspNetUserTokens.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="local.publish.xml" />

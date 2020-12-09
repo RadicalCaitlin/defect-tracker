@@ -3,29 +3,35 @@ using Microsoft.AspNetCore.Mvc;
 using DefectTracker.Web.Models;
 using DefectTracker.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Identity;
-using DefectTracker.Contracts.Repositories;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using DefectTracker.Core;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DefectTracker.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IProjectRepository _projectRepository;
+        private readonly DefectTrackerDbContext _dbContext;
 
-        public HomeController(UserManager<IdentityUser> userManager, IProjectRepository projectRepository)
+        public HomeController(
+            UserManager<IdentityUser> userManager, 
+            DefectTrackerDbContext dbContext
+            )
         {
             _userManager = userManager;
-            _projectRepository = projectRepository;
+            _dbContext = dbContext;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             var model = new IndexViewModel
             {
-                Projects = await _projectRepository.GetAllProjectsAsync()
+                Projects = await _dbContext.Projects.Where(p => p.CreatedByUserId == user.Id).ToListAsync()
             };
 
             return View(model);

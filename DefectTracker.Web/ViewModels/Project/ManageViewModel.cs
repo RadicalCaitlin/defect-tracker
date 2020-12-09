@@ -1,5 +1,6 @@
-﻿using DefectTracker.Contracts.Requests;
-using DefectTracker.Core;
+﻿using DefectTracker.Core;
+using DefectTracker.Web.Models.AreaViewModels;
+using DefectTracker.Web.Models.ProjectViewModels;
 using System.Collections.Generic;
 
 namespace DefectTracker.Web.ViewModels.Project
