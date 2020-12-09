@@ -93,12 +93,6 @@ namespace DefectTracker.Web.Controllers
                 UserId = user.Id
             };
 
-            if (TempData["CreateProjectRequest"] != null)
-            {
-                model = (CreateProjectRequest)TempData["CreateProjectRequest"];
-                ViewData = (ViewDataDictionary)TempData["ViewData"];
-            }
-
             return View(model);
         }
 
@@ -163,9 +157,7 @@ namespace DefectTracker.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["CreateProjectRequest"] = request;
-                TempData["ViewData"] = ViewData;
-                return View();
+                return View(request);
             }
 
             var project = request.CreateProject();

@@ -68,10 +68,8 @@
     <Build Include="dbo\Tables\Core\Defects.sql" />
     <None Include="dbo\Scripts\SeedDefectTypes.sql" />
     <None Include="dbo\Scripts\SeedDefectModelTypes.sql" />
-    <Build Include="dbo\Tables\Core\ProjectAreas.sql" />
     <Build Include="dbo\Tables\Core\ProjectUsers.sql" />
     <Build Include="dbo\Tables\Core\Activities.sql" />
-    <Build Include="dbo\Tables\Core\Tasks.sql" />
     <Build Include="dbo\Tables\Core\Types\DefectQualifierTypes.sql" />
     <Build Include="dbo\Tables\Core\Types\DefectTypes.sql" />
     <Build Include="dbo\Tables\Core\ProjectBugs.sql" />
@@ -83,6 +81,9 @@
     <Build Include="dbo\Tables\AspNetUserClaims.sql" />
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
+    <Build Include="dbo\Tables\Core\Clients.sql" />
+    <Build Include="dbo\Tables\Core\Types\ProjectStatuses.sql" />
+    <None Include="dbo\Scripts\SeedProjectStatuses.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="local.publish.xml" />
