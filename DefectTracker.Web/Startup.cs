@@ -36,15 +36,9 @@ namespace DefectTracker
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
-            var mvc = services.AddControllersWithViews()
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
-                .AddSessionStateTempDataProvider();
-
-            services.AddRazorPages();
-
-#if (DEBUG)
-            mvc.AddRazorRuntimeCompilation();
-#endif
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IEmailSender, EmailSender>();
 
